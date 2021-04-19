@@ -9,7 +9,7 @@ var coupon = document.getElementById('coupon');
 
 var prezzoBase = 50;
 var coupons = ["sconto2021", "sconto-bool"]; /*array con i due codici sconto*/
-var sconto = 0.5;
+var sconto = 0.3;
 writePrice(prezzoBase, prezzoBurger);
 
 /* Events */

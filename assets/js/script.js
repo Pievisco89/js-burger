@@ -9,7 +9,7 @@ var coupon = document.getElementById('coupon');
 
 var prezzoBase = 50;
 var coupons = ["sconto2021", "sconto-bool"]; /*array con i due codici sconto*/
-var sconto = 0.2;
+var sconto = 0.5;
 writePrice(prezzoBase, prezzoBurger);
 
 /* Events */
@@ -31,7 +31,7 @@ btn.addEventListener('click', function(){
       var ingredient = ingredients[i];
 
       if(ingredient.checked === true){ 
-        /*calcolare il prezzo degli ingredienti selezionati*/
+        /*calcolare il prezzo degli ingredienti selezionati tramite .value*/
         prezzoIngredienti += parseInt(ingredient.value);
       }
     }
@@ -41,8 +41,8 @@ btn.addEventListener('click', function(){
     /* controllare se viene inserito uno sconto */
     if(coupons.includes(coupon.value)){ /* controllo se l'input è presente nell'array coupons. Non cambiava nulla aggiungere "=== 0" */
       
-      prezzoTotale -= prezzoTotale * sconto; /* prezzo totale scontato, potevo anche scrivere: prezzoTotale *= (1 - sconto) */
-    
+      prezzoTotale = calcDiscount(prezzoTotale, sconto);/* prezzo totale scontato */
+      console.log(prezzoTotale);
     }
 
     writePrice (prezzoTotale, prezzoBurger) /*stampo prezzo totale burger tramite funzione creata all'inizio*/
@@ -50,12 +50,13 @@ btn.addEventListener('click', function(){
   
 });
 
-
-
 /* Functions */
-
-/* creare una funziona per stampare il prezzo sul target html */
-function writePrice (value, target) {
+/* creare una funzione per stampare il prezzo sul target html */
+function writePrice(value, target) {
   target.innerHTML = value.toFixed(2);
 }
 
+/* creare una funzione per lo sconto */
+function calcDiscount(priceTot, disc){
+  return priceTot -= priceTot * disc; /* potevo anche scrivere prezzoTotale *= (1 - disc) */ 
+}
